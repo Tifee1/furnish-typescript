@@ -14,13 +14,6 @@ import {
 } from 'react-icons/md'
 import { GrDiamond } from 'react-icons/gr'
 
-// import ChildRoom from '../assets/childroom-furniture.png'
-// import FloorPlanning from '../assets/floor-planning.png'
-// import Furniture from '../assets/furniture.png'
-// import InteriorDesign from '../assets/interior-design.png'
-// import Lighting from '../assets/lighting.png'
-// import OfficeFurniture from '../assets/office-furniture.png'
-
 export const links = [
   { label: 'home', url: '/', icon: <FaHome /> },
   {
@@ -75,14 +68,14 @@ export const chooseUs = [
   },
 ]
 
-// export const services = [
-//   { label: 'lighting', img: Lighting },
-//   { label: 'interior design', img: InteriorDesign },
-//   { label: 'floor planning', img: FloorPlanning },
-//   { label: 'furniture', img: Furniture },
-//   { label: 'office furniture', img: OfficeFurniture },
-//   { label: 'childRoom Furniture', img: ChildRoom },
-// ]
+export const services = [
+  { label: 'lighting', img: '/assets/lighting.png' },
+  { label: 'interior design', img: '/assets/interior-design.png' },
+  { label: 'floor planning', img: '/assets/floor-planning.png' },
+  { label: 'furniture', img: '/assets/furniture.png' },
+  { label: 'office furniture', img: '/assets/office-furniture.png' },
+  { label: 'childRoom Furniture', img: '/assets/childroom-furniture.png' },
+]
 
 export const faqItems = [
   {

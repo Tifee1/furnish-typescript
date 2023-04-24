@@ -1,3 +1,6 @@
+import { CartProvider } from '@/components/context/cartcontext'
+import { FilterProvider } from '@/components/context/filtercontext'
+import { ProductProvider } from '@/components/context/productcontext'
 import { UserProvider } from '@/components/context/usercontext'
 import Footer from '@/components/layout/Footer'
 import Navbar from '@/components/layout/Navbar'
@@ -10,10 +13,16 @@ export default function App({ Component, pageProps }: AppProps) {
   return (
     <>
       <UserProvider>
-        <Sidebar />
-        <Navbar />
-        <Component {...pageProps} />
-        <Footer />
+        <ProductProvider>
+          <CartProvider>
+            <FilterProvider>
+              <Sidebar />
+              <Navbar />
+              <Component {...pageProps} />
+              <Footer />
+            </FilterProvider>
+          </CartProvider>
+        </ProductProvider>
       </UserProvider>
     </>
   )

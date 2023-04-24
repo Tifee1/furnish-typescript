@@ -1,23 +1,30 @@
-export const formatPrice = (price) => {
+import { ProductType } from '../types/typeDefinition'
+
+export const formatPrice = (price: number) => {
   return new Intl.NumberFormat('en-NG', {
     style: 'currency',
     currency: 'NGN',
   }).format(price / 100)
 }
 
-export const uniqueValues = (arr, val, select) => {
+export const uniqueValues = (
+  arr: ProductType[],
+  val: keyof ProductType,
+  select?: boolean
+): string[] => {
   if (select) {
     return ['all', ...new Set(arr.map((item) => item.colors).flat())]
   }
-  return ['all', ...new Set(arr.map((item) => item[val]))]
+  const firstMap = arr.map((item) => item[val]) as string[]
+  const secondMap = [...new Set(firstMap)]
+  return ['all', ...secondMap]
 }
 
-export const getLocalStorage = (type) => {
+export const getLocalStorage = <CartType>(type: string): CartType[] => {
+  if (typeof window === 'undefined') return []
   let storage = localStorage.getItem(type)
   if (!storage) {
-    storage = []
-  } else {
-    storage = JSON.parse(localStorage.getItem(type))
+    storage = JSON.stringify([])
   }
-  return storage
+  return JSON.parse(storage) as CartType[]
 }
