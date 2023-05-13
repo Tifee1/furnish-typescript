@@ -4,6 +4,7 @@ import reducer from './filterReducer'
 import useProductContext from './productcontext'
 
 export type StateType = {
+  loading: boolean
   all_products: ProductType[]
   filtered_products: ProductType[]
   grid_view: boolean
@@ -36,6 +37,7 @@ type FilterContextType = StateType & {
 const FilterContext = React.createContext({} as FilterContextType)
 
 const initialState: StateType = {
+  loading: false,
   all_products: [],
   filtered_products: [],
   grid_view: true,
@@ -60,6 +62,7 @@ export const FilterProvider = ({ children }: { children: React.ReactNode }) => {
   }, [products])
 
   useEffect(() => {
+    dispatch({ type: 'SET_LOADING' })
     dispatch({ type: 'SET_FILTERS' })
     dispatch({ type: 'SORT' })
   }, [state.filters, state.sort])

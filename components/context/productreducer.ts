@@ -15,8 +15,7 @@ const reducer = (state: StateType, action: ActionType): StateType => {
     return { ...state, loading: true, error: false }
   }
   if (action.type === 'SET_DATA') {
-    const featured = action.payload!.filter((item) => item.featured === true)
-    return { ...state, products: action.payload, loading: false, featured }
+    return { ...state, products: action.payload, loading: false }
   }
   if (action.type === 'SET_ERROR') {
     return { ...state, error: true, loading: false }

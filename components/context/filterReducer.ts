@@ -2,6 +2,7 @@ import { ProductType } from '../types/typeDefinition'
 import { StateType } from './filtercontext'
 
 type ActionType =
+  | { type: 'SET_LOADING' }
   | { type: 'SET_PRODUCTS'; payload: ProductType[] }
   | { type: 'SET_GRIDVIEW' }
   | { type: 'SET_LISTVIEW' }
@@ -16,6 +17,9 @@ type ActionType =
   | { type: undefined }
 
 const reducer = (state: StateType, action: ActionType): StateType => {
+  if (action.type === 'SET_LOADING') {
+    return { ...state, loading: true }
+  }
   if (action.type === 'SET_PRODUCTS') {
     const maxPrice = Math.max(...action.payload.map((item) => item.price))
 
@@ -103,7 +107,7 @@ const reducer = (state: StateType, action: ActionType): StateType => {
         (c) => c.shipping === shipping
       )
     }
-    return { ...state, filtered_products }
+    return { ...state, filtered_products, loading: false }
   }
 
   if (action.type === 'SORT') {
@@ -132,7 +136,7 @@ const reducer = (state: StateType, action: ActionType): StateType => {
         b.name.localeCompare(a.name)
       )
     }
-    return { ...state, filtered_products }
+    return { ...state, filtered_products, loading: false }
   }
 
   throw new Error(`no matching '${action.type}' action type`)

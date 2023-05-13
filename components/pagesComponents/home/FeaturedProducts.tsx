@@ -1,18 +1,14 @@
 import Link from 'next/link'
 import useProductContext from '@/components/context/productcontext'
 import DisplayProducts from '@/components/pagesComponents/products/DisplayProducts'
+import { ProductType } from '@/components/types/typeDefinition'
 
-const FeaturedProducts = () => {
-  const { featured, loading, error } = useProductContext()
+type Props = {
+  products: ProductType[]
+  error: boolean
+}
 
-  if (loading) {
-    return (
-      <section className='py-16'>
-        <div className='loading'></div>
-      </section>
-    )
-  }
-
+const FeaturedProducts = ({ products, error }: Props) => {
   if (error) {
     return (
       <section className='section-center py-20 text-center'>
@@ -27,7 +23,7 @@ const FeaturedProducts = () => {
       <div className='underline'></div>
       <div className='px-8 py-16'>
         <section className='grid tm:grid-cols-2 xl:grid-cols-3 tm:gap-8'>
-          {featured.slice(0, 3).map((product) => {
+          {products.slice(0, 3).map((product) => {
             return <DisplayProducts key={product.id} {...product} />
           })}
         </section>

@@ -13,7 +13,6 @@ const ProductContext = React.createContext({} as ProductContextType)
 
 export type StateType = {
   products: ProductType[]
-  featured: ProductType[]
   loading: boolean
   error: boolean
   singleProduct: SingleProductType
@@ -22,7 +21,6 @@ export type StateType = {
 }
 const initialState: StateType = {
   products: [],
-  featured: [],
   loading: false,
   error: false,
   singleProduct: {} as SingleProductType,

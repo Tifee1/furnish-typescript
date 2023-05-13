@@ -10,20 +10,24 @@ import { formatPrice } from '@/components/utils/helpers'
 import Images from '@/components/pagesComponents/singleProducts/Images'
 import Stars from '@/components/pagesComponents/singleProducts/Stars'
 import AddToCart from '@/components/pagesComponents/singleProducts/AddToCart'
+import { GetStaticPropsContext } from 'next'
+import { fetchSingleProduct, getFeaturedProducts } from '@/components/utils/api'
+import { SingleProductType } from '@/components/types/typeDefinition'
 
-const SingleProduct = () => {
-  const {
-    fetchSingleProduct,
-    singleProduct: product,
-    singleLoading,
-  } = useProductContext()
+type Props = {
+  product: SingleProductType
+  error: boolean
+}
+
+const SingleProduct = ({ product, error }: Props) => {
+  const { fetchSingleProduct } = useProductContext()
   const router = useRouter()
 
-  const id = router.query.productID as string
+  // const id = router.query.productID as string
 
-  useEffect(() => {
-    fetchSingleProduct(id)
-  }, [id])
+  // useEffect(() => {
+  //   fetchSingleProduct(id)
+  // }, [id])
 
   const {
     images,
@@ -35,11 +39,12 @@ const SingleProduct = () => {
     shipping,
     reviews,
     stars,
+    id,
   } = product
 
-  if (singleLoading) {
-    return <Loading />
-  }
+  // if (singleLoading) {
+  //   return <Loading />
+  // }
 
   return (
     <>
@@ -86,3 +91,39 @@ const SingleProduct = () => {
   )
 }
 export default SingleProduct
+
+export const getStaticProps = async (context: GetStaticPropsContext) => {
+  if (!context.params) return
+
+  const productID = context.params.productID as string
+
+  try {
+    const product = await fetchSingleProduct(productID)
+    return {
+      props: {
+        product,
+        error: false,
+      },
+      revalidate: 600,
+    }
+  } catch (error) {
+    return {
+      props: {
+        error: true,
+      },
+      revalidate: 10,
+    }
+  }
+}
+
+export const getStaticPaths = async () => {
+  const featured = await getFeaturedProducts()
+  const id = featured.map((item) => item.id)
+
+  return {
+    paths: id.map((i) => {
+      return { params: { productID: i } }
+    }),
+    fallback: 'blocking',
+  }
+}
