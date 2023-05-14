@@ -1,9 +1,3 @@
-import { useEffect } from 'react'
-
-import { useRouter } from 'next/router'
-
-import useProductContext from '@/components/context/productcontext'
-import Loading from '@/components/layout/Loading'
 import Hero from '@/components/layout/Hero'
 import Link from 'next/link'
 import { formatPrice } from '@/components/utils/helpers'
@@ -13,6 +7,7 @@ import AddToCart from '@/components/pagesComponents/singleProducts/AddToCart'
 import { GetStaticPropsContext } from 'next'
 import { fetchSingleProduct, getFeaturedProducts } from '@/components/utils/api'
 import { SingleProductType } from '@/components/types/typeDefinition'
+import SingleProductError from '@/components/pagesComponents/singleProducts/SingleProductError'
 
 type Props = {
   product: SingleProductType
@@ -20,14 +15,9 @@ type Props = {
 }
 
 const SingleProduct = ({ product, error }: Props) => {
-  const { fetchSingleProduct } = useProductContext()
-  const router = useRouter()
-
-  // const id = router.query.productID as string
-
-  // useEffect(() => {
-  //   fetchSingleProduct(id)
-  // }, [id])
+  if (error) {
+    return <SingleProductError />
+  }
 
   const {
     images,
@@ -41,10 +31,6 @@ const SingleProduct = ({ product, error }: Props) => {
     stars,
     id,
   } = product
-
-  // if (singleLoading) {
-  //   return <Loading />
-  // }
 
   return (
     <>
@@ -124,6 +110,6 @@ export const getStaticPaths = async () => {
     paths: id.map((i) => {
       return { params: { productID: i } }
     }),
-    fallback: 'blocking',
+    fallback: true,
   }
 }

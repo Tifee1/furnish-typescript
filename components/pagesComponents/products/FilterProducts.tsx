@@ -1,10 +1,14 @@
+import { ProductType } from '@/components/types/typeDefinition'
 import { FaCheck } from 'react-icons/fa'
 import useFilterContext from '../../context/filtercontext'
 import { formatPrice, uniqueValues } from '../../utils/helpers'
 
-const FilterProducts = () => {
-  const { all_products, filters, changeFilter, clearFilters } =
-    useFilterContext()
+type Props = {
+  products: ProductType[]
+}
+
+const FilterProducts = ({ products }: Props) => {
+  const { filters, changeFilter, clearFilters } = useFilterContext()
 
   const { price, maxPrice, search, company, category, shipping, color } =
     filters
@@ -28,7 +32,7 @@ const FilterProducts = () => {
         {/* Category */}
         <div className='mb-4'>
           <h3 className='my-2 font-semibold'>category</h3>
-          {uniqueValues(all_products, 'category').map((item, index) => {
+          {uniqueValues(products, 'category').map((item, index) => {
             return (
               <button
                 className={`block border border-yel px-2 py-1 mb-2 rounded-md capitalize tracking-wider ${
@@ -61,7 +65,7 @@ const FilterProducts = () => {
               changeFilter({ name: e.target.name, value: e.target.value })
             }
           >
-            {uniqueValues(all_products, 'company').map((item, index) => {
+            {uniqueValues(products, 'company').map((item, index) => {
               return (
                 <option value={item} key={index}>
                   {item}
@@ -75,7 +79,7 @@ const FilterProducts = () => {
         <div className='mb-4'>
           <h3 className='my-2 font-semibold'>colors</h3>
           <div className='flex items-center'>
-            {uniqueValues(all_products, 'colors', true).map((item, index) => {
+            {uniqueValues(products, 'colors', true).map((item, index) => {
               if (item === 'all') {
                 return (
                   <button

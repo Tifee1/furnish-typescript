@@ -33,9 +33,9 @@ const Products = ({ error, products }: Props) => {
     <>
       <Hero title='products' />
       <section className='section-center gap-x-12 gap-y-6 grid tm:grid-cols-[200px,1fr] my-16 mx-auto max-w-7xl'>
-        <FilterProducts />
+        <FilterProducts products={products} />
         <div>
-          <Sort />
+          <Sort products={filteredProducts} />
           {loading ? (
             <Loading />
           ) : (

@@ -1,15 +1,14 @@
+import { ProductType } from '@/components/types/typeDefinition'
 import { BsFillGridFill, BsList } from 'react-icons/bs'
 import useFilterContext from '../../context/filtercontext'
 
-const Sort = () => {
-  const {
-    filtered_products,
-    grid_view,
-    setGridView,
-    setListView,
-    sort,
-    changeSort,
-  } = useFilterContext()
+type Props = {
+  products: ProductType[]
+}
+
+const Sort = ({ products }: Props) => {
+  const { grid_view, setGridView, setListView, sort, changeSort } =
+    useFilterContext()
 
   return (
     <section className='grid grid-cols-[1fr] im:grid-cols-[auto_auto_1fr_auto] items-center px-4 mb-8 gap-y-3 im:gap-y-0 im:gap-x-8 im-mb-8'>
@@ -31,9 +30,7 @@ const Sort = () => {
           <BsList />
         </button>
       </div>
-      <p className='capitalize tm:mb-0'>
-        {filtered_products.length} products found
-      </p>
+      <p className='capitalize tm:mb-0'>{products.length} products found</p>
       <hr className='border-black' />
       <div>
         <form className='flex items-center justify-center max-w-[200px]'>
