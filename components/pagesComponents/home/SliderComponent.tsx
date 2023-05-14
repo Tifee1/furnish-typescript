@@ -7,7 +7,6 @@ import {
 } from '@/components/slider/CustomArrow'
 import { sliderImages } from '@/components/utils/constant'
 import Slider from 'react-slick'
-import { Bounce, Fade } from 'react-awesome-reveal'
 import SliderText from '@/components/slider/SliderText'
 
 const SliderComponent = () => {
