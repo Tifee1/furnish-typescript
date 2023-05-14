@@ -1,4 +1,4 @@
-import React, { useContext, useReducer, useState, useEffect } from 'react'
+import React, { useContext, useReducer, useRef, useEffect } from 'react'
 import { CartType, SingleProductType } from '../types/typeDefinition'
 import { getLocalStorage } from '../utils/helpers'
 import reducer from './cartReducer'
@@ -11,22 +11,25 @@ export type StateType = {
 }
 
 type ContextType = StateType & {
-  addToCart: (amount: number, color: string, product: SingleProductType) => void
+  addToMyCart: (
+    amount: number,
+    color: string,
+    product: SingleProductType
+  ) => void
   toggleAmount: (id: string, type: string, max: number) => void
   removeItem: (id: string) => void
   clearCart: () => void
 }
 
-const initialState: StateType = {
-  cart: getLocalStorage('cart'),
-  noOfItems: 0,
-  totalAmount: 0,
-  shippingFee: 0,
-}
-
 const CartContext = React.createContext({} as ContextType)
 
 export const CartProvider = ({ children }: { children: React.ReactNode }) => {
+  const initialState: StateType = {
+    cart: getLocalStorage('cart'),
+    noOfItems: 0,
+    totalAmount: 0,
+    shippingFee: 0,
+  }
   const [state, dispatch] = useReducer(reducer, initialState)
 
   useEffect(() => {
@@ -34,7 +37,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     dispatch({ type: 'UPDATE_TOTALS' })
   }, [state.cart])
 
-  const addToCart = (
+  const addToMyCart = (
     amount: number,
     color: string,
     product: SingleProductType
@@ -58,7 +61,7 @@ export const CartProvider = ({ children }: { children: React.ReactNode }) => {
     <CartContext.Provider
       value={{
         ...state,
-        addToCart,
+        addToMyCart,
         toggleAmount,
         removeItem,
         clearCart,

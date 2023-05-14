@@ -21,10 +21,12 @@ export const uniqueValues = (
 }
 
 export const getLocalStorage = <CartType>(type: string): CartType[] => {
-  if (typeof window === 'undefined') return []
-  let storage = localStorage.getItem(type)
-  if (!storage) {
-    storage = JSON.stringify([])
+  if (typeof window !== 'undefined') {
+    let storage = localStorage.getItem(type)
+    if (!storage) {
+      storage = JSON.stringify([])
+    }
+    return JSON.parse(storage) as CartType[]
   }
-  return JSON.parse(storage) as CartType[]
+  return []
 }
