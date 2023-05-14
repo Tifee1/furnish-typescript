@@ -164,7 +164,7 @@ h4 {
 
 /* Carousel */
 
-.carousel.carousel-slider .control-arrow {
+/* .carousel.carousel-slider .control-arrow {
   top: 50%;
   height: 50px;
   color: #fff;
@@ -213,6 +213,87 @@ h4 {
 }
 .carousel .thumb:hover {
   border: 3px solid #fff;
+} */
+
+.slick-next::before,
+.slick-prev::before {
+  content: '';
+}
+
+.slick-next,
+.slick-prev {
+  background-color: transparent;
+  transition: all 0.3s linear;
+}
+.slick-next:hover,
+.slick-prev:hover {
+  background: rgba(0, 0, 0, 0.2);
+}
+
+.slick-dots li {
+  height: 120px;
+  width: 100px;
+  margin-left: 8px;
+}
+.slick-dots img {
+  border-radius: 50%;
+  border: 3px solid #fff;
+}
+
+.slick-active img {
+  border: 3px solid rgb(215 187 62);
+}
+
+.slide-in-left {
+  animation: slide-in-left 3s ease forwards;
+  animation-delay: 0.2s;
+}
+.slide-in-right {
+  animation: slide-in-right 3s ease forwards;
+  animation-delay: 0.2s;
+}
+.scale-image {
+  animation: scaleImage 10s ease forwards;
+  animation-delay: 0.2s;
+}
+.bannerTime {
+  height: 4px;
+  background-color: #d7bb3e;
+  animation: bannerTime 10s linear forwards;
+  animation-delay: 0.4s;
+}
+
+@keyframes slide-in-left {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes slide-in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+@keyframes scaleImage {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.2);
+  }
+}
+@keyframes bannerTime {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 100%;
+  }
 }
 
 @media screen and (min-width: 1008px) {

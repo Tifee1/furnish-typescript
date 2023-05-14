@@ -1,9 +1,9 @@
 import Choose from '@/components/pagesComponents/home/Choose'
 import Discover from '@/components/pagesComponents/home/Discover'
 import FeaturedProducts from '@/components/pagesComponents/home/FeaturedProducts'
+import SliderComponent from '@/components/pagesComponents/home/SliderComponent'
 import { ProductType } from '@/components/types/typeDefinition'
 import { getFeaturedProducts, getProducts } from '@/components/utils/api'
-import axios from 'axios'
 
 type Props = {
   error: boolean
@@ -13,6 +13,7 @@ type Props = {
 export default function HomePage({ error, products }: Props) {
   return (
     <main className='page'>
+      <SliderComponent />
       <Choose />
       <Discover />
       <FeaturedProducts error={error} products={products} />
