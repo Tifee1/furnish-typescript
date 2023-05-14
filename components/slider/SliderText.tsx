@@ -17,7 +17,7 @@ const SliderText = ({ currentSlide, index, item }: Props) => {
           }`}
         />
 
-        <div className='absolute top-1/2 text-white grid items-center justify-center w-full text-center slider-text'>
+        <div className='absolute top-1/3 text-white grid items-center justify-center w-full text-center slider-text'>
           <h1
             className={`font-extrabold pb-6  ${
               currentSlide === index && 'slide-in-left'

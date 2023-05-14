@@ -21,7 +21,7 @@ const SliderComponent = () => {
     autoplay: true,
     autoplaySpeed: 10000,
     dots: true,
-    dotsClass: 'slick-dots slick-thumb',
+    dotsClass: 'slick-img slick-thumb',
     infinite: true,
     speed: 2500,
     fade: true,
@@ -45,7 +45,7 @@ const SliderComponent = () => {
           <h3 className='font-semibold slide-in-right'>Available on Furnish</h3>
         </div>
       </section>
-      <section className='hidden justify-center items-center tm:block min-h-[calc(100vh-72px)]'>
+      <section className='hidden relative tm:block min-h-[calc(100vh-72px)]'>
         <Slider
           {...settings}
           customPaging={(i) => <CustomPaging index={i} onClick={() => {}} />}

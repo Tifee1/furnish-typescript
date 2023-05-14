@@ -14,19 +14,11 @@ export const CustomPrevArrow = ({
 }: CustomArrowProps) => {
   return (
     <button
-      className={className}
+      className='slick-my-prev text-2xl'
       style={{
         ...style,
-        display: 'block',
-        top: '50%',
-        left: '0', // Set right property to 0
-        transform: 'translateY(-50%)',
-        color: '#fff',
-        fontSize: '26px',
-        padding: '0 20px',
-        borderRadius: '50%',
-        width: '4rem',
-        height: '4rem',
+        left: '0',
+        marginLeft: '6px',
         zIndex: 1,
       }}
       onClick={onClick}
@@ -42,19 +34,10 @@ export const CustomNextArrow = ({
 }: CustomArrowProps) => {
   return (
     <button
-      className={className}
+      className='slick-my-next text-2xl'
       style={{
-        ...style,
-        display: 'block',
-        top: '50%',
-        right: '0', // Set right property to 0
-        transform: 'translateY(-50%)',
-        color: '#fff',
-        fontSize: '26px',
-        padding: '0 20px',
-        borderRadius: '50%',
-        width: '4rem',
-        height: '4rem',
+        right: '0',
+        marginRight: '6px',
       }}
       onClick={onClick}
     >
